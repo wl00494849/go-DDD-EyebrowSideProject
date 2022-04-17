@@ -3,7 +3,6 @@ package repository
 import "go-DDD/domain/entity"
 
 type LatestNewsRepo interface {
-	GetNew(newId string)
-	GetNewsList()
-	SetNew(new *entity.LatestNews)
+	GetNewDetail(newId string) *entity.LatestNews
+	SetNew(new *entity.LatestNews) error
 }

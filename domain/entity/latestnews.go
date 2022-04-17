@@ -3,8 +3,9 @@ package entity
 import "time"
 
 type LatestNews struct {
-	NewID      string
+	NewID      int
+	Title      string
 	Content    string
-	CreateTime time.Duration
+	CreateTime time.Time
 	Images     [][]byte
 }
