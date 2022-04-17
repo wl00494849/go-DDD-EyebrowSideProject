@@ -3,8 +3,8 @@ package main
 import (
 	"flag"
 	"fmt"
-	"go-DDD/controller"
 	"go-DDD/infrastruture/persistence"
+	"go-DDD/interfaces"
 	"go-DDD/middleware"
 	"os"
 
@@ -36,7 +36,7 @@ func main() {
 		fmt.Println(err)
 	}
 
-	newController := controller.NewLastestNewsController(servers.LatestNewsRepo)
+	newController := interfaces.NewLastestNewsController(servers.LatestNewsRepo)
 
 	//app
 	app := gin.Default()
