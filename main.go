@@ -44,6 +44,6 @@ func main() {
 	app.Use(middleware.CORSMiddleware())
 	//route
 	app.GET("/GetNewDetail", newController.GetNewDetail)
-	app.POST("/SetNew", newController.SetNew)
+	app.POST("/SetNew", newController.CreateNew)
 	app.Run(port)
 }

@@ -30,7 +30,7 @@ func (r *LatestNewsRepo) GetNewDetail(newID string) *entity.LatestNews {
 	return news
 }
 
-func (r *LatestNewsRepo) SetNew(new *entity.LatestNews) error {
+func (r *LatestNewsRepo) CreateNew(new *entity.LatestNews) error {
 	stmt, _ := r.db.Prepare("Insert lastestNew set title=?,contant=?,createTime=?")
 	_, err := stmt.Exec(new.Title, new.Content, time.Now().Local())
 	return err

@@ -23,10 +23,10 @@ func (ln *LastestNews) GetNewDetail(ctx *gin.Context) {
 	ctx.JSON(200, data)
 }
 
-func (ln *LastestNews) SetNew(ctx *gin.Context) {
+func (ln *LastestNews) CreateNew(ctx *gin.Context) {
 	var data entity.LatestNews
 	ctx.ShouldBindJSON(&data)
-	err := ln.aln.SetNew(&data)
+	err := ln.aln.CreateNew(&data)
 	if err != nil {
 		ctx.JSON(500, "Set fail")
 	}
