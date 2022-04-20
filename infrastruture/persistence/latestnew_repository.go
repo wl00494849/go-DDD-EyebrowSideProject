@@ -36,6 +36,18 @@ func (r *LatestNewsRepo) CreateNew(new *entity.LatestNews) error {
 }
 
 func (r *LatestNewsRepo) DeleteNew(newId string) error {
-	_, err := r.db.Exec("delete from lastestNew where Id=?")
+	_, err := r.db.Exec("delete from lastestNew where id=?", newId)
 	return err
+}
+
+func (r *LatestNewsRepo) GetNewList() *[]entity.LatestNews {
+	sli := make([]entity.LatestNews, 0)
+	rows, _ := r.db.Query("Select id,title,createTime from lastestNew")
+	defer rows.Close()
+	for rows.Next() {
+		var data entity.LatestNews
+		rows.Scan(&data.NewID, &data.Title, &data.CreateTime)
+		sli = append(sli, data)
+	}
+	return &sli
 }

@@ -39,13 +39,20 @@ func (ln *LastestNews) CreateNew(ctx *gin.Context) {
 }
 
 func (ln *LastestNews) DeleteNew(ctx *gin.Context) {
-	id := ctx.PostForm("NewID")
-	if id == "" {
+	var data map[string]string
+	ctx.ShouldBindJSON(&data)
+	if data["NewID"] == "" {
 		ctx.JSON(200, &restdto.Result{
 			IsSuccess: false,
 			Msg:       "Not have ID",
 		})
+	} else {
+		ln.aln.DeleteNew(data["NewID"])
+		ctx.JSON(200, restdto.Success())
 	}
-	ln.aln.DeleteNew(id)
-	ctx.JSON(200, restdto.Success())
+}
+
+func (ln *LastestNews) GetNewList(ctx *gin.Context) {
+	result := ln.aln.GetListNew()
+	ctx.JSON(200, result)
 }

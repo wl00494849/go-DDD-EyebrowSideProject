@@ -42,7 +42,13 @@ func main() {
 	//middle
 	app.Use(middleware.CORSMiddleware())
 	//route
-	app.GET("/GetNewDetail", newController.GetNewDetail)
-	app.POST("/CreateNew", newController.CreateNew)
+	news := app.Group("/News")
+	{
+		news.GET("/GetNewDetail", newController.GetNewDetail)
+		news.POST("/CreateNew", newController.CreateNew)
+		news.POST("/DeleteNew", newController.DeleteNew)
+		news.GET("/GetNewList", newController.GetNewList)
+	}
+
 	app.Run(port)
 }
