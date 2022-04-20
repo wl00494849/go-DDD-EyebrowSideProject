@@ -37,13 +37,12 @@ func main() {
 	}
 
 	newController := interfaces.NewLastestNewsController(servers.LatestNewsRepo)
-
 	//app
 	app := gin.Default()
 	//middle
 	app.Use(middleware.CORSMiddleware())
 	//route
 	app.GET("/GetNewDetail", newController.GetNewDetail)
-	app.POST("/SetNew", newController.CreateNew)
+	app.POST("/CreateNew", newController.CreateNew)
 	app.Run(port)
 }

@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"go-DDD/domain/entity"
 	"go-DDD/domain/repository"
-	"time"
 )
 
 type LatestNewsRepo struct {
@@ -31,7 +30,12 @@ func (r *LatestNewsRepo) GetNewDetail(newID string) *entity.LatestNews {
 }
 
 func (r *LatestNewsRepo) CreateNew(new *entity.LatestNews) error {
-	stmt, _ := r.db.Prepare("Insert lastestNew set title=?,contant=?,createTime=?")
-	_, err := stmt.Exec(new.Title, new.Content, time.Now().Local())
+	stmt, _ := r.db.Prepare("Insert lastestNew set id=?,title=?,contant=?,createTime=?")
+	_, err := stmt.Exec(new.NewID, new.Title, new.Content, new.CreateTime)
+	return err
+}
+
+func (r *LatestNewsRepo) DeleteNew(newId string) error {
+	_, err := r.db.Exec("delete from lastestNew where Id=?")
 	return err
 }

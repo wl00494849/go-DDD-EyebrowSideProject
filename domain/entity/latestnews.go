@@ -3,7 +3,7 @@ package entity
 import "time"
 
 type LatestNews struct {
-	NewID      int
+	NewID      string
 	Title      string
 	Content    string
 	CreateTime time.Time
