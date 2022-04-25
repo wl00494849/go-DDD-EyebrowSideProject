@@ -28,6 +28,7 @@ func (ln *LastestNews) GetNewDetail(ctx *gin.Context) {
 func (ln *LastestNews) CreateNew(ctx *gin.Context) {
 	var data entity.LatestNews
 	ctx.ShouldBindJSON(&data)
+	file, _ := ctx.FormFile("Image")
 	err := ln.aln.CreateNew(data)
 	if err != nil {
 		ctx.JSON(500, &restdto.Result{
@@ -35,6 +36,8 @@ func (ln *LastestNews) CreateNew(ctx *gin.Context) {
 			Msg:       "CreateNew Fail",
 		})
 	}
+	ctx.SaveUploadedFile(file, "/asset/New/"+file.Filename)
+
 	ctx.JSON(200, restdto.Success())
 }
 

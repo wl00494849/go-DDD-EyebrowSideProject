@@ -36,6 +36,7 @@ func main() {
 		fmt.Println(err)
 	}
 
+	defer servers.Close()
 	newController := interfaces.NewLastestNewsController(servers.LatestNewsRepo)
 	//app
 	app := gin.Default()
