@@ -7,5 +7,4 @@ type LatestNews struct {
 	Title      string
 	Content    string
 	CreateTime time.Time
-	Images     [][]byte
 }
