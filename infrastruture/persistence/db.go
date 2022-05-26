@@ -9,8 +9,8 @@ import (
 )
 
 type Repositories struct {
-	LatestNewsRepo repository.LatestNewsRepo
-	db             *sql.DB
+	AnnouncementRepo repository.AnnouncementRepo
+	db               *sql.DB
 }
 
 func NewRepositories(us, pwd, addr, dbName string) (*Repositories, error) {
@@ -36,8 +36,8 @@ func NewRepositories(us, pwd, addr, dbName string) (*Repositories, error) {
 	}
 
 	return &Repositories{
-		LatestNewsRepo: NewLatestNewRepo(d),
-		db:             d,
+		AnnouncementRepo: NewLatestNewRepo(d),
+		db:               d,
 	}, nil
 }
 

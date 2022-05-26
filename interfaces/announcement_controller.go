@@ -13,7 +13,7 @@ type LastestNews struct {
 	aln application.LastestNewApp
 }
 
-func NewLastestNewsController(ln repository.LatestNewsRepo) *LastestNews {
+func NewLastestNewsController(ln repository.AnnouncementRepo) *LastestNews {
 	return &LastestNews{
 		aln: *application.CreateNewLastestNewApp(ln),
 	}
@@ -26,7 +26,7 @@ func (ln *LastestNews) GetNewDetail(ctx *gin.Context) {
 }
 
 func (ln *LastestNews) CreateNew(ctx *gin.Context) {
-	var data entity.LatestNews
+	var data entity.Announcement
 	ctx.ShouldBindJSON(&data)
 	file, _ := ctx.FormFile("Image")
 	err := ln.aln.CreateNew(data)

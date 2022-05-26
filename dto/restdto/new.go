@@ -4,7 +4,7 @@ import (
 	"time"
 )
 
-type LatestNewsList struct {
+type AnnouncementList struct {
 	NewID      string
 	Title      string
 	CreateTime time.Time

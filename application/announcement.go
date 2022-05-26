@@ -8,31 +8,31 @@ import (
 )
 
 type LastestNewApp struct {
-	rl repository.LatestNewsRepo
+	rl repository.AnnouncementRepo
 }
 
 var _ LastestNewAppInterFace = &LastestNewApp{}
 
 type LastestNewAppInterFace interface {
-	GetNewDetail(newID string) *entity.LatestNews
-	CreateNew(new entity.LatestNews) error
+	GetNewDetail(newID string) *entity.Announcement
+	CreateNew(new entity.Announcement) error
 	DeleteNew(newID string) error
-	GetListNew() *[]restdto.LatestNewsList
+	GetListNew() *[]restdto.AnnouncementList
 }
 
-func CreateNewLastestNewApp(rl repository.LatestNewsRepo) *LastestNewApp {
+func CreateNewLastestNewApp(rl repository.AnnouncementRepo) *LastestNewApp {
 	return &LastestNewApp{
 		rl: rl,
 	}
 }
 
-func (r *LastestNewApp) GetNewDetail(newID string) *entity.LatestNews {
+func (r *LastestNewApp) GetNewDetail(newID string) *entity.Announcement {
 	return r.rl.GetNewDetail(newID)
 }
 
-func (r *LastestNewApp) CreateNew(new entity.LatestNews) error {
+func (r *LastestNewApp) CreateNew(new entity.Announcement) error {
 	new.NewID = generatorID()
-	new.CreateTime = time.Now().Local()
+	new.Create_Time = time.Now().Local()
 	err := r.rl.CreateNew(&new)
 	return err
 }
@@ -41,14 +41,14 @@ func (r *LastestNewApp) DeleteNew(newId string) error {
 	return r.rl.DeleteNew(newId)
 }
 
-func (r *LastestNewApp) GetListNew() *[]restdto.LatestNewsList {
-	rto := make([]restdto.LatestNewsList, 0)
+func (r *LastestNewApp) GetListNew() *[]restdto.AnnouncementList {
+	rto := make([]restdto.AnnouncementList, 0)
 	datas := r.rl.GetNewList()
 	for _, v := range *datas {
-		var ls restdto.LatestNewsList
+		var ls restdto.AnnouncementList
 		ls.NewID = v.NewID
 		ls.Title = v.Title
-		ls.CreateTime = v.CreateTime
+		ls.CreateTime = v.Create_Time
 		rto = append(rto, ls)
 	}
 

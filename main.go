@@ -37,7 +37,7 @@ func main() {
 	}
 
 	defer servers.Close()
-	newController := interfaces.NewLastestNewsController(servers.LatestNewsRepo)
+	newController := interfaces.NewLastestNewsController(servers.AnnouncementRepo)
 	//app
 	app := gin.Default()
 	//middle
