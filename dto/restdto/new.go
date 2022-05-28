@@ -5,7 +5,14 @@ import (
 )
 
 type AnnouncementList struct {
-	NewID      string
+	Id         int
 	Title      string
 	CreateTime time.Time
+}
+type AnnouncementCreate struct {
+	Title      string
+	Content    string
+	Statu      bool
+	Shelf_Time string
+	IsTop      bool
 }

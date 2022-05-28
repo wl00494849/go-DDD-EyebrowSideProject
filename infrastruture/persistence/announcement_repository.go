@@ -22,7 +22,7 @@ func (r *AnnouncementRepo) GetNewDetail(newID string) *entity.Announcement {
 	fmt.Println(newID)
 	news := &entity.Announcement{}
 	row := r.db.QueryRow("Select * from Announcement where Id=?", newID)
-	err := row.Scan(&news.NewID, &news.Title, &news.Content, &news.Create_Time)
+	err := row.Scan(&news.Id, &news.Title, &news.Content, &news.Create_Time)
 	if err != nil {
 		panic(err)
 	}
@@ -30,8 +30,9 @@ func (r *AnnouncementRepo) GetNewDetail(newID string) *entity.Announcement {
 }
 
 func (r *AnnouncementRepo) CreateNew(new *entity.Announcement) error {
-	stmt, _ := r.db.Prepare("Insert Announcement set Id=?,Title=?,Contant=?,Shelf_Time=?,Create_Time=?,IsTop=?")
-	_, err := stmt.Exec(new.NewID, new.Title, new.Content, new.Create_Time)
+	fmt.Printf("%+v", new)
+	stmt, _ := r.db.Prepare("Insert Announcement set Title=?,Contant=?,Shelf_Time=?,Create_Time=?,IsTop=?,Statu=?")
+	_, err := stmt.Exec(new.Title, new.Content, new.Shelf_Time.Format("yyyy-mm-dd"), new.Create_Time, new.IsTop, new.Statu)
 	return err
 }
 
@@ -46,7 +47,7 @@ func (r *AnnouncementRepo) GetNewList() *[]entity.Announcement {
 	defer rows.Close()
 	for rows.Next() {
 		var data entity.Announcement
-		rows.Scan(&data.NewID, &data.Title, &data.Create_Time)
+		rows.Scan(&data.Id, &data.Title, &data.Create_Time)
 		sli = append(sli, data)
 	}
 	return &sli

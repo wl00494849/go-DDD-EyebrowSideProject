@@ -31,7 +31,6 @@ func (r *LastestNewApp) GetNewDetail(newID string) *entity.Announcement {
 }
 
 func (r *LastestNewApp) CreateNew(new entity.Announcement) error {
-	new.NewID = generatorID()
 	new.Create_Time = time.Now().Local()
 	err := r.rl.CreateNew(&new)
 	return err
@@ -46,7 +45,7 @@ func (r *LastestNewApp) GetListNew() *[]restdto.AnnouncementList {
 	datas := r.rl.GetNewList()
 	for _, v := range *datas {
 		var ls restdto.AnnouncementList
-		ls.NewID = v.NewID
+		ls.Id = v.Id
 		ls.Title = v.Title
 		ls.CreateTime = v.Create_Time
 		rto = append(rto, ls)
