@@ -36,7 +36,7 @@ func NewRepositories(us, pwd, addr, dbName string) (*Repositories, error) {
 	}
 
 	return &Repositories{
-		AnnouncementRepo: NewLatestNewRepo(d),
+		AnnouncementRepo: NewAnnouncementRepo(d),
 		db:               d,
 	}, nil
 }
