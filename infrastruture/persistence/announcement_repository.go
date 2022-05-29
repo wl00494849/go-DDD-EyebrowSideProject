@@ -11,7 +11,7 @@ type AnnouncementRepo struct {
 	db *sql.DB
 }
 
-func NewLatestNewRepo(db *sql.DB) *AnnouncementRepo {
+func NewAnnouncementRepo(db *sql.DB) *AnnouncementRepo {
 	return &AnnouncementRepo{db}
 }
 
