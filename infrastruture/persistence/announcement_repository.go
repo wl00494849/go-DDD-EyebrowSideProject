@@ -31,8 +31,8 @@ func (r *AnnouncementRepo) GetNewDetail(newID string) *entity.Announcement {
 
 func (r *AnnouncementRepo) CreateNew(new *entity.Announcement) error {
 	fmt.Printf("%+v", new)
-	stmt, _ := r.db.Prepare("Insert Announcement set Title=?,Contant=?,Shelf_Time=?,Create_Time=?,IsTop=?,Statu=?")
-	_, err := stmt.Exec(new.Title, new.Content, new.Shelf_Time.Format("yyyy-mm-dd"), new.Create_Time, new.IsTop, new.Statu)
+	stmt, _ := r.db.Prepare("Insert Announcement set Title=?,Content=?,Shelf_Time=?,Create_Time=?,IsTop=?,Statu=?")
+	_, err := stmt.Exec(new.Title, new.Content, new.Shelf_Time, new.Create_Time, new.IsTop, new.Statu)
 	return err
 }
 

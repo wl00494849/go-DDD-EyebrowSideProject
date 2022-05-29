@@ -31,6 +31,7 @@ func (r *LastestNewApp) GetNewDetail(newID string) *entity.Announcement {
 }
 
 func (r *LastestNewApp) CreateNew(new entity.Announcement) error {
+	new.Shelf_Time = time.Now().Local()
 	new.Create_Time = time.Now().Local()
 	err := r.rl.CreateNew(&new)
 	return err
