@@ -20,7 +20,7 @@ func NewLastestNewsController(ln repository.AnnouncementRepo) *LastestNews {
 }
 
 func (ln *LastestNews) GetNewDetail(ctx *gin.Context) {
-	id := ctx.Query("NewID")
+	id := ctx.Query("Id")
 	data := ln.aln.GetNewDetail(id)
 	ctx.JSON(200, data)
 }
@@ -42,7 +42,7 @@ func (ln *LastestNews) CreateNew(ctx *gin.Context) {
 func (ln *LastestNews) DeleteNew(ctx *gin.Context) {
 	var data map[string]string
 	ctx.ShouldBindJSON(&data)
-	if data["NewID"] == "" {
+	if data["Id"] == "" {
 		ctx.JSON(200, &restdto.Result{
 			IsSuccess: false,
 			Msg:       "Not have ID",

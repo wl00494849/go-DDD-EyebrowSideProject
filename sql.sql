@@ -1,4 +1,5 @@
 create database Eyebrow;
+use Eyebrow
 
 create table Sys_Setting
 (

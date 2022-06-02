@@ -22,7 +22,7 @@ func (r *AnnouncementRepo) GetNewDetail(newID string) *entity.Announcement {
 	fmt.Println(newID)
 	news := &entity.Announcement{}
 	row := r.db.QueryRow("Select * from Announcement where Id=?", newID)
-	err := row.Scan(&news.Id, &news.Title, &news.Content, &news.Create_Time)
+	err := row.Scan(&news.Id, &news.Title, &news.Content, &news.Statu, &news.Shelf_Time, &news.Create_Time, &news.IsTop)
 	if err != nil {
 		panic(err)
 	}
