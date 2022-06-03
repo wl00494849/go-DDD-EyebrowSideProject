@@ -30,10 +30,7 @@ func (ln *LastestNews) CreateNew(ctx *gin.Context) {
 	ctx.ShouldBindJSON(&data)
 	err := ln.aln.CreateNew(data)
 	if err != nil {
-		ctx.JSON(500, &restdto.Result{
-			IsSuccess: false,
-			Msg:       "CreateNew Fail",
-		})
+		ctx.JSON(500, "")
 	}
 
 	ctx.JSON(200, restdto.Success())
@@ -43,10 +40,7 @@ func (ln *LastestNews) DeleteNew(ctx *gin.Context) {
 	var data map[string]string
 	ctx.ShouldBindJSON(&data)
 	if data["Id"] == "" {
-		ctx.JSON(200, &restdto.Result{
-			IsSuccess: false,
-			Msg:       "Not have ID",
-		})
+		ctx.JSON(401, "")
 	} else {
 		ln.aln.DeleteNew(data["Id"])
 		ctx.JSON(200, restdto.Success())
