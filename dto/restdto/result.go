@@ -5,9 +5,22 @@ type Result struct {
 	Msg       string
 }
 
-func Success()*Result  {
+func Success() *Result {
 	return &Result{
 		IsSuccess: true,
-		Msg: "Success",
+		Msg:       "Success",
+	}
+}
+func Fail500() *Result {
+	return &Result{
+		IsSuccess: false,
+		Msg:       "Server Error",
+	}
+}
+
+func Fail403() *Result {
+	return &Result{
+		IsSuccess: false,
+		Msg:       "Data Error",
 	}
 }

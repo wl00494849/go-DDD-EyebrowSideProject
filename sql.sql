@@ -45,7 +45,7 @@ create table Reserve
 	Id int auto_increment primary key,
     ReserveName varchar(16),
     Phone varchar(16),
-    Category_Id varchar(3),
+    Category_Id int,
     SubCategory_Id varchar(3),
     Appointment date,
 	Period bit
@@ -54,9 +54,9 @@ create table Reserve
 create table SubCategory
 (
 	Id int auto_increment primary key,
-    CategoryId varchar(3),
+    Category_Id int,
     SubCategory_Name varchar(255),
-    Price int,
+    Price varchar(255),
     SubCategory_Order int
 );
 
