@@ -38,6 +38,7 @@ func main() {
 
 	defer servers.Close()
 	newController := interfaces.NewLastestNewsController(servers.AnnouncementRepo)
+	subcategoryController := interfaces.NewSubcategoryController(servers.SubCategoryRepo)
 	//app
 	app := gin.Default()
 	//middle
@@ -45,10 +46,16 @@ func main() {
 	//route
 	news := app.Group("/News")
 	{
-		news.GET("/GetNewDetail", newController.GetNewDetail)
-		news.POST("/CreateNew", newController.CreateNew)
-		news.POST("/DeleteNew", newController.DeleteNew)
-		news.GET("/GetNewList", newController.GetNewList)
+		news.GET("/GetDetail", newController.GetNewDetail)
+		news.POST("/Create", newController.CreateNew)
+		news.POST("/Delete", newController.DeleteNew)
+		news.GET("/GetList", newController.GetNewList)
+	}
+	subcategory := app.Group("/Subcategory")
+	{
+		subcategory.POST("/Create", subcategoryController.CreateSubCategory)
+		subcategory.POST("/Delete", subcategoryController.DeleteSubCategory)
+		subcategory.GET("/GetLsit", subcategoryController.GetSubCategorys)
 	}
 
 	app.Run(port)

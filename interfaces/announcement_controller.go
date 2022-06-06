@@ -20,9 +20,12 @@ func NewLastestNewsController(ln repository.AnnouncementRepo) *LastestNews {
 }
 
 func (ln *LastestNews) GetNewDetail(ctx *gin.Context) {
+	result := restdto.Success()
+
 	id := ctx.Query("Id")
-	data := ln.aln.GetNewDetail(id)
-	ctx.JSON(200, data)
+	result.Data = ln.aln.GetNewDetail(id)
+
+	ctx.JSON(200, &result)
 }
 
 func (ln *LastestNews) CreateNew(ctx *gin.Context) {
@@ -48,6 +51,7 @@ func (ln *LastestNews) DeleteNew(ctx *gin.Context) {
 }
 
 func (ln *LastestNews) GetNewList(ctx *gin.Context) {
-	result := ln.aln.GetListNew()
-	ctx.JSON(200, result)
+	result := restdto.Success()
+	result.Data = ln.aln.GetListNew()
+	ctx.JSON(200, &result)
 }

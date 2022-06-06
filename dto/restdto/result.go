@@ -3,6 +3,7 @@ package restdto
 type Result struct {
 	IsSuccess bool
 	Msg       string
+	Data      interface{}
 }
 
 func Success() *Result {

@@ -11,6 +11,7 @@ import (
 type Repositories struct {
 	AnnouncementRepo repository.AnnouncementRepo
 	SysCodeRepo      repository.SysCodeRepo
+	SubCategoryRepo  repository.SubcategoryRepo
 	db               *sql.DB
 }
 
@@ -39,6 +40,7 @@ func NewRepositories(us, pwd, addr, dbName string) (*Repositories, error) {
 	return &Repositories{
 		AnnouncementRepo: NewAnnouncementRepo(d),
 		SysCodeRepo:      NewSysCodeRepo(d),
+		SubCategoryRepo:  NewSubcategoryRepo(d),
 		db:               d,
 	}, nil
 }
