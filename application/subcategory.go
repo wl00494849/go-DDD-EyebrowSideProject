@@ -3,6 +3,7 @@ package application
 import (
 	"go-DDD/domain/entity"
 	"go-DDD/domain/repository"
+	"go-DDD/dto/restdto"
 )
 
 type SubcategoryApp struct {
@@ -10,7 +11,7 @@ type SubcategoryApp struct {
 }
 
 type SubcategoryInterfact interface {
-	GetSubCategorys(code string) *[]entity.Subcategory
+	GetSubCategorys(code string) *[]restdto.Subcategory
 	CreateSubCategory(data *entity.Subcategory) error
 	DeleteSubCategory(code string) error
 }
@@ -21,8 +22,19 @@ func CreateSysCodeApp(rs repository.SubcategoryRepo) *SubcategoryApp {
 
 var _ SubcategoryInterfact = &SubcategoryApp{}
 
-func (r *SubcategoryApp) GetSubCategorys(code string) *[]entity.Subcategory {
-	return r.rs.GetSubCategorys(code)
+func (r *SubcategoryApp) GetSubCategorys(code string) *[]restdto.Subcategory {
+	data := make([]restdto.Subcategory, 0)
+	rd := r.rs.GetSubCategorys(code)
+	for _, v := range *rd {
+		var d restdto.Subcategory
+		d.Id = v.Id
+		d.SubCategory_Name = v.Subcategory_Name
+		d.Price = v.Price
+		d.Subcategory_Order = v.Subcategory_Order
+		data = append(data, d)
+	}
+
+	return &data
 }
 func (r *SubcategoryApp) CreateSubCategory(data *entity.Subcategory) error {
 	return r.rs.CreateSubCategory(data)
