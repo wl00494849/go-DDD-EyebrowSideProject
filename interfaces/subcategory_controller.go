@@ -30,7 +30,7 @@ func (s *SubCategory) CreateSubCategory(ctx *gin.Context) {
 
 func (s *SubCategory) GetSubCategorys(ctx *gin.Context) {
 	result := restdto.Success()
-	code := ctx.Query("Id")
+	code := ctx.Query("CategoryId")
 	result.Data = s.as.GetSubCategorys(code)
 	ctx.JSON(200, result)
 }

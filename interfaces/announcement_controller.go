@@ -21,7 +21,6 @@ func NewLastestNewsController(ln repository.AnnouncementRepo) *LastestNews {
 
 func (ln *LastestNews) GetNewDetail(ctx *gin.Context) {
 	result := restdto.Success()
-
 	id := ctx.Query("Id")
 	result.Data = ln.aln.GetNewDetail(id)
 

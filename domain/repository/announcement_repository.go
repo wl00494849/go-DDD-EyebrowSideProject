@@ -7,4 +7,5 @@ type AnnouncementRepo interface {
 	CreateNew(new *entity.Announcement) error
 	DeleteNew(newId string) error
 	GetNewList() *[]entity.Announcement
+	// UploadNews(new *entity.Announcement) error
 }
