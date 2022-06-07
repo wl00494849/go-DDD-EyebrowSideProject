@@ -4,6 +4,7 @@ import (
 	"go-DDD/domain/entity"
 	"go-DDD/domain/repository"
 	"go-DDD/dto/restdto"
+	"sort"
 )
 
 type SubcategoryApp struct {
@@ -33,7 +34,7 @@ func (r *SubcategoryApp) GetSubCategorys(code string) *[]restdto.Subcategory {
 		d.Subcategory_Order = v.Subcategory_Order
 		data = append(data, d)
 	}
-
+	sort.Slice(data, func(i, j int) bool { return data[i].Subcategory_Order < data[j].Subcategory_Order })
 	return &data
 }
 func (r *SubcategoryApp) CreateSubCategory(data *entity.Subcategory) error {

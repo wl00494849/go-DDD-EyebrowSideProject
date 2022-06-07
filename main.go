@@ -55,7 +55,7 @@ func main() {
 	{
 		subcategory.POST("/Create", subcategoryController.CreateSubCategory)
 		subcategory.POST("/Delete", subcategoryController.DeleteSubCategory)
-		subcategory.GET("/GetLsit", subcategoryController.GetSubCategorys)
+		subcategory.GET("/GetList", subcategoryController.GetSubCategorys)
 	}
 
 	app.Run(port)
