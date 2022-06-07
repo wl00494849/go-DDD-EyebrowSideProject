@@ -8,6 +8,13 @@ type AnnouncementList struct {
 	Id         int
 	Title      string
 	CreateTime time.Time
+	IsTop      bool
+}
+type AnnouncementDetail struct {
+	Id          int
+	Title       string
+	Content     string
+	Create_Time time.Time
 }
 type AnnouncementCreate struct {
 	Title      string

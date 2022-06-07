@@ -14,7 +14,7 @@ type LastestNewApp struct {
 var _ LastestNewAppInterFace = &LastestNewApp{}
 
 type LastestNewAppInterFace interface {
-	GetNewDetail(newID string) *entity.Announcement
+	GetNewDetail(newID string) *restdto.AnnouncementDetail
 	CreateNew(new entity.Announcement) error
 	DeleteNew(newID string) error
 	GetListNew() *[]restdto.AnnouncementList
@@ -26,8 +26,14 @@ func CreateNewLastestNewApp(rl repository.AnnouncementRepo) *LastestNewApp {
 	}
 }
 
-func (r *LastestNewApp) GetNewDetail(newID string) *entity.Announcement {
-	return r.rl.GetNewDetail(newID)
+func (r *LastestNewApp) GetNewDetail(newID string) *restdto.AnnouncementDetail {
+	data := r.rl.GetNewDetail(newID)
+	return &restdto.AnnouncementDetail{
+		Id:          data.Id,
+		Title:       data.Title,
+		Content:     data.Content,
+		Create_Time: data.Create_Time,
+	}
 }
 
 func (r *LastestNewApp) CreateNew(new entity.Announcement) error {
@@ -49,6 +55,7 @@ func (r *LastestNewApp) GetListNew() *[]restdto.AnnouncementList {
 		ls.Id = v.Id
 		ls.Title = v.Title
 		ls.CreateTime = v.Create_Time
+		ls.IsTop = v.IsTop
 		rto = append(rto, ls)
 	}
 
