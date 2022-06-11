@@ -1,9 +1,11 @@
 package middleware
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+)
 
 func CORSMiddleware() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
-		ctx.Writer.Header().Set("Access-Control-Allow-Orgin", "*")
+		ctx.Header("Access-Control-Allow-Orgin", "*")
 	}
 }

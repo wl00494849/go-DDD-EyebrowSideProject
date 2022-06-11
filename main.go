@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"go-DDD/infrastruture/persistence"
 	"go-DDD/interfaces"
-	"go-DDD/middleware"
 	"os"
 
+	cors "github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 )
@@ -42,7 +42,9 @@ func main() {
 	//app
 	app := gin.Default()
 	//middle
-	app.Use(middleware.CORSMiddleware())
+	app.Use(cors.New(cors.Config{
+		AllowAllOrigins: true,
+	}))
 	//route
 	news := app.Group("/News")
 	{
