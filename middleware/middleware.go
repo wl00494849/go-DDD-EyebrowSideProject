@@ -6,7 +6,6 @@ import (
 
 func CORSMiddleware() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
-		ctx.Header("Access-Control-Allow-Orgin", "*")
-		ctx.Next()
+		ctx.Writer.Header().Set("Access-Control-Allow-Origin", "*")
 	}
 }
