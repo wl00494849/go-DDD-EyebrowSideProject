@@ -1,10 +1,10 @@
 create database Eyebrow;
-use Eyebrow
+use Eyebrow;
 
 create table Sys_Setting
 (
     Id int auto_increment primary key,
-	SS_Key varchar(255) primary key,
+	SS_Key varchar(255) ,
 	SS_Type varchar(255),
     SS_Value varchar(1500),
     SS_Dese varchar(255),
